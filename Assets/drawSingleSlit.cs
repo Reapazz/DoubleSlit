@@ -30,7 +30,7 @@ public class drawSingleSlit : MonoBehaviour
        }
        */
 
-        transform.rotation = Quaternion.Euler(45, 0, 0);
+        //transform.rotation = Quaternion.Euler(45, 0, 0);
         //Draw Back Wall
 
         for (int ih = -30; ih <= 30; ih++)
@@ -38,34 +38,34 @@ public class drawSingleSlit : MonoBehaviour
             for (int i = -20; i <= PlaceField.Length + 20; i++)
             {
 
-                GameObject newCube = Instantiate(cubePrefab, new Vector3(PlaceField.Width - 2,  Mathf.Sqrt(2) * ih,  Mathf.Sqrt(2) * i), transform.rotation);
+                GameObject newCube = Instantiate(cubePrefab, new Vector3(PlaceField.Width - 2,    ih, i), transform.rotation);
                 slit.Add(newCube);
             }
         }
 
 
         //Draw Double slit:
-        for (int ih = -height; ih < height; ih++) { 
+        for (int ih = -(height+10); ih < height+10; ih++) { 
 
-        for (int i = 0; i < (PlaceField.Length - LightBeam.waveGen) / 2 - 4; i++)
+        for (int i = -10; i < (PlaceField.Length - LightBeam.waveGen) / 2 -7; i++)
         {
-            GameObject newCube = Instantiate(cubePrefab, new Vector3(LightBeam.waveGen + (LightBeam.waveGen % 2), ih*Mathf.Sqrt(2),  i * Mathf.Sqrt(2)), transform.rotation);
+            GameObject newCube = Instantiate(cubePrefab, new Vector3(LightBeam.waveGen + (LightBeam.waveGen % 2), ih ,  i ), transform.rotation);
             slit.Add(newCube);
         }
 
-        for (int i = (PlaceField.Length + LightBeam.waveGen) / 2 + 5 - PlaceField.Length % 2; i < PlaceField.Length; i++)
+        for (int i = (PlaceField.Length + LightBeam.waveGen) / 2 +6 - PlaceField.Length % 2; i < PlaceField.Length+10; i++)
         {
-            GameObject newCube = Instantiate(cubePrefab, new Vector3(LightBeam.waveGen * 1 + (LightBeam.waveGen % 2), ih * Mathf.Sqrt(2),  i* Mathf.Sqrt(2)), transform.rotation);
+            GameObject newCube = Instantiate(cubePrefab, new Vector3(LightBeam.waveGen * 1 + (LightBeam.waveGen % 2), ih ,  i), transform.rotation);
             slit.Add(newCube);
         }
 
 
 
-        for (int i = ((PlaceField.Length - LightBeam.waveGen) / 2) - 2; i <= ((PlaceField.Length + LightBeam.waveGen) / 2) + 2; i++)
+        for (int i = ((PlaceField.Length - LightBeam.waveGen) / 2) - 2; i <= ((PlaceField.Length + LightBeam.waveGen) / 2) + 1; i++)
         {
 
 
-            GameObject centerCube = Instantiate(cubePrefab, new Vector3(LightBeam.waveGen + (LightBeam.waveGen % 2), ih * Mathf.Sqrt(2), (( i)*Mathf.Sqrt(2))), transform.rotation);
+            GameObject centerCube = Instantiate(cubePrefab, new Vector3(LightBeam.waveGen + (LightBeam.waveGen % 2), ih , (( i))), transform.rotation);
             slit.Add(centerCube);
         }
     }

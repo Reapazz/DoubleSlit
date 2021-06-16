@@ -54,12 +54,16 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\colliderUpdate.cs" />
+     <Compile Include="Assets\doubleslit45degreerotated.cs" />
      <Compile Include="Assets\drawDoubleSlit.cs" />
      <Compile Include="Assets\drawSingleSlit.cs" />
      <Compile Include="Assets\EntangledMove.cs" />
+     <Compile Include="Assets\EntangledMove2.cs" />
      <Compile Include="Assets\Grid.cs" />
+     <Compile Include="Assets\HorizontalMove.cs" />
      <Compile Include="Assets\InstantiateGrid.cs" />
      <Compile Include="Assets\LightBeam.cs" />
+     <Compile Include="Assets\lightbeam45degree.cs" />
      <Compile Include="Assets\LightVertical.cs" />
      <Compile Include="Assets\Mathd.cs" />
      <Compile Include="Assets\Move1.cs" />

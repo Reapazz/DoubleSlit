@@ -1,4 +1,5 @@
-﻿
+
+
 
 
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Collections;
 using System.Threading;
 using UnityEngine;
 
-public class LightVertical : MonoBehaviour
+public class HorizontalMove : MonoBehaviour
 {
     float x, y, z;
 
@@ -18,8 +19,8 @@ public class LightVertical : MonoBehaviour
 
 
     public GameObject EntangledModel;
-    public GameObject Entangled,Entangled2,Entangled4;
-    
+    public GameObject Entangled,Entangled1,Entangled3;
+   
 
     public Vector3 prevPos;
     public int sameDirectionCounter;
@@ -40,7 +41,6 @@ public class LightVertical : MonoBehaviour
         fieldScripts = GameObject.Find("FieldScripts");
         obj = fieldScripts.GetComponent<TimeCounter>();
         colliderList = fieldScripts.GetComponent<drawSingleSlit>().getColliderArray();
-        z = transform.position.z;
 
         //gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
     }
@@ -51,30 +51,25 @@ public class LightVertical : MonoBehaviour
     public void Update()
     {
 
-        fieldScripts = GameObject.Find("FieldScripts");
-        obj = fieldScripts.GetComponent<TimeCounter>();
 
 
 
 
+        x = transform.position.x + 1;
         if (obj.run() == true) //&& obj.LightStep<obj.EntangledLightStep
         { //If the remainder of the current frame divided by 100 is 0 run the function.
 
             obj.LightStep = obj.frames;
-
             
-
             if (Entangled == null)
             {
-               
-
-
-                x = transform.position.x + 1;
-                //y = transform.position.y + (transform.position.y - prevPos.y);
+                
 
 
 
-                if (sameDirectionCounter >= wavelength)
+
+
+                if (sameDirectionCounter >=  wavelength)
                 {
                     sameDirectionCounter = 0;
 
@@ -84,17 +79,16 @@ public class LightVertical : MonoBehaviour
 
                     if (i == 1)
                     {
+                       y = transform.position.y;
 
-                        y = transform.position.y + 1;
-                      
-    
+                        z = transform.position.z + 1;
 
 
                     }
                     if (i == 0)
                     {
-                        y = transform.position.y - 1;
-                       z = transform.position.z ;
+                        z = transform.position.z - 1;
+                        y = transform.position.y ;
 
                     }
 
@@ -107,121 +101,94 @@ public class LightVertical : MonoBehaviour
                 {
 
 
-                    y = transform.position.y + (transform.position.y - prevPos.y);
-                    z = transform.position.z ;
+                    z = transform.position.z + (transform.position.z - prevPos.z);
+                    y = transform.position.y ;
 
 
                 }
             }
-            else //entangled
+            else
             {
-
                 
-        if(Entangled2 == null && Entangled4 != null){
 
-        z = transform.position.z+ (Entangled4.transform.position.z- Entangled4.GetComponent<HorizontalMove>().prevPos.z);
-          try {
-
-                Entangled2 = Entangled4.GetComponent<HorizontalMove>().Entangled;
-
-            }
-            catch (NullReferenceException e){
-                Console.WriteLine($"No partner to entangle  '{e}'");
-            } 
-
-        }
-
-        else if(Entangled4 == null && Entangled2 != null){
-
-            z = transform.position.z+ (Entangled2.transform.position.z- Entangled2.GetComponent<HorizontalMove>().prevPos.z); 
-            try {
-
-                Entangled4 = Entangled2.GetComponent<HorizontalMove>().Entangled;
-
-            }
-            catch (NullReferenceException e){
-                Console.WriteLine($"No partner to entangle  '{e}'");
-            } 
-
-        }
-                
-                x = transform.position.x + 1;
-             
                 if (sameDirectionCounter == wavelength)
                 {
                     sameDirectionCounter = 0;
 
-                    y = transform.position.y - (transform.position.y - prevPos.y);
-                    z = transform.position.z ;
-
+                    z = transform.position.z - (transform.position.z - prevPos.z);
+                    y = transform.position.y ;
 
 
                 }
                 else
                 {
-                    y = transform.position.y + (transform.position.y - prevPos.y);
-                    z = transform.position.z ;
+                    z = transform.position.z + (transform.position.z - prevPos.z);
+                   y = transform.position.y ;
                 }
 
 
 
             }
-            prevPos = transform.position;
             sameDirectionCounter++;
+            prevPos = transform.position;
             UnityEngine.Collider[] intersecting = Physics.OverlapSphere(new Vector3(x, y, z), 0.0005f);
             if (intersecting.Length == 0)
 
             {
+                
                 gameObject.GetComponent<Renderer>().material = LightSkin;
                 transform.position = new Vector3(x, y, z);
+
 
 
             }
 
 
-
-
-
             else foreach (UnityEngine.Collider obj in intersecting)
                 {
+
                     if (colliderList.Contains(obj.gameObject))
-                    { 
-                       transform.position = new Vector3(x, y, z);
+                    { //TODO cant figure this shit out
+                        transform.position = new Vector3(x, y, z);
                         GameObject wall = obj.gameObject;
                         wall.GetComponent<colliderUpdate>().hits++;
                         Destroy(gameObject);
                         Destroy(this);
-                        //UnityEngine.Debug.Log("Died");
-                      
+                        // UnityEngine.Debug.Log("Died");
+
+                 
+
+
                     }
 
-                    if (obj.gameObject.GetComponent<LightVertical>() != null && obj.gameObject.GetComponent<LightVertical>().enabled == true)
+
+                    if (obj.gameObject.GetComponent<HorizontalMove>() != null && obj.gameObject.GetComponent<HorizontalMove>().enabled == true)
                     {
 
                         transform.position = new Vector3(x, y, z);
                         GameObject entangled2 = obj.gameObject;
                         if (Entangled != null)
                         {
-                            Entangled.GetComponent<LightVertical>().Entangled = null;
+                            this.Entangled.GetComponent<HorizontalMove>().Entangled = null;
                         }
+
                         Entangle(entangled2);
-                        entangled2.GetComponent<LightVertical>().Entangle(gameObject);
+                        entangled2.GetComponent<HorizontalMove>().Entangle(gameObject);
                         gameObject.GetComponent<Renderer>().material = EntangledLightSkin;
                         entangled2.GetComponent<Renderer>().material = EntangledLightSkin;
-
+                        
                     }
-
                     if (obj.name.Contains("Sphere"))
                     {
-
+                       
                         Destroy(gameObject);
                         Destroy(this);
                         UnityEngine.Debug.Log("Died in Sphere");
-                      
-
+                        
+                       
 
                     }
-                    else if (obj.gameObject.GetComponent<HorizontalMove>() != null || obj.gameObject.GetComponent<LightVertical>() != null) //only other possible option is that it collided with another light particle which is not entangled in same direction
+                    else if(obj.gameObject.GetComponent<HorizontalMove>() != null || obj.gameObject.GetComponent<LightVertical>() != null)
                     {
 
                         transform.position = new Vector3(x, y, z);
@@ -230,14 +197,25 @@ public class LightVertical : MonoBehaviour
                         gameObject.GetComponent<Renderer>().material = EntangledLightSkin;
 
                     }
+
+
                 }
+            //   GameObject ent =  Instantiate (EntangledModel, new Vector3(x, y, z), transform.rotation); 
+            //    ent.GetComponent<EntangledMove>().enabled = true; 
+            //  ent.GetComponent<EntangledMove>().fieldScripts   =  GameObject.Find("FieldScripts");
+            //ent.GetComponent<EntangledMove>().obj =  fieldScripts.GetComponent<TimeCounter>();
+            //  /ent.GetComponent<EntangledMove>().isLaser = false;
 
-
+            //obj.EntangledLightStep = obj.frames;
 
         }
-
-
     }
+
+
+
+
+    // transform.position += transform.forward*Time.deltaTime;       
+
 
     public void Entangle(GameObject ent)
     {

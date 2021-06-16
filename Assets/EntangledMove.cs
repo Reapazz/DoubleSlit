@@ -35,16 +35,18 @@ public class EntangledMove : MonoBehaviour
         obj.EntangledLightStep = 0;
         obj.LightStep = 1;
 
-        y = y2 = transform.position.y + (1 / Mathf.Sqrt(2));
+        y  = transform.position.y + (1);
+        y3 = transform.position.y - (1);
+        y2=y4= transform.position.y;
         x = x2 = x3 = x4 = transform.position.x + 1;
 
-        z = z4 = transform.position.z - (1 / Mathf.Sqrt(2));
+        z3 = z = transform.position.z ;
+        z2 = transform.position.z+1;
+        z4 = transform.position.z-1;
 
 
 
-        z3 = z2 = transform.position.z + (1 / Mathf.Sqrt(2));
-        y4 = y3 = transform.position.y - (1 / Mathf.Sqrt(2));
-
+       
 
 
 
@@ -103,71 +105,71 @@ public class EntangledMove : MonoBehaviour
             obj.LightStep = obj.frames;
 
             /*
-            ent1.GetComponent<Move1>().Entangle(ent2);
-            ent2.GetComponent<Move1>().Entangle(ent1);
-            ent1.GetComponent<Move1>().sameDirectionCounter = 1;
-            ent2.GetComponent<Move1>().sameDirectionCounter = 1;
+            ent1.GetComponent<LightVertical>().Entangle(ent2);
+            ent2.GetComponent<LightVertical>().Entangle(ent1);
+            ent1.GetComponent<LightVertical>().sameDirectionCounter = 1;
+            ent2.GetComponent<LightVertical>().sameDirectionCounter = 1;
 
-            ent1.GetComponent<Move1>().Update();
-            ent2.GetComponent<Move1>().Update();
+            ent1.GetComponent<LightVertical>().Update();
+            ent2.GetComponent<LightVertical>().Update();
             */
 
 
 
             ent1 = Instantiate(LightModel, new Vector3(x, y, z), transform.rotation);
-            ent1.GetComponent<Move1>().enabled = true;
+            ent1.GetComponent<LightVertical>().enabled = true;
             ent2 = Instantiate(LightModel, new Vector3(x2, y2, z2), transform.rotation);
-            ent2.GetComponent<LightVertical>().enabled = true;
+            ent2.GetComponent<HorizontalMove>().enabled = true;
 
             ent3 = Instantiate(LightModel, new Vector3(x3, y3, z3), transform.rotation);
-            ent3.GetComponent<Move1>().enabled = true;
+            ent3.GetComponent<LightVertical>().enabled = true;
             ent4 = Instantiate(LightModel, new Vector3(x4, y4, z4), transform.rotation);
-            ent4.GetComponent<LightVertical>().enabled = true;
+            ent4.GetComponent<HorizontalMove>().enabled = true;
 
-            ent1.GetComponent<Move1>().Entangle(ent3);
-            ent3.GetComponent<Move1>().Entangle(ent1);
-            ent1.GetComponent<Move1>().sameDirectionCounter = 1;
-            ent3.GetComponent<Move1>().sameDirectionCounter = 1;
+            ent1.GetComponent<LightVertical>().Entangle(ent3);
+            ent3.GetComponent<LightVertical>().Entangle(ent1);
+            ent1.GetComponent<LightVertical>().sameDirectionCounter = 1;
+            ent3.GetComponent<LightVertical>().sameDirectionCounter = 1;
 
-            ent1.GetComponent<Move1>().setPreviousPos(transform.position);
-            ent3.GetComponent<Move1>().setPreviousPos(transform.position);
-            ent2.GetComponent<LightVertical>().setPreviousPos(transform.position);
-            ent4.GetComponent<LightVertical>().setPreviousPos(transform.position);
-
-
-
-
-
-            ent2.GetComponent<LightVertical>().Entangle(ent4);
-            ent4.GetComponent<LightVertical>().Entangle(ent2);
-
-
-            ent2.GetComponent<LightVertical>().sameDirectionCounter = 1;
-            ent4.GetComponent<LightVertical>().sameDirectionCounter = 1;
-
-            ent1.GetComponent<Move1>().wavelength = wave;
-            ent3.GetComponent<Move1>().wavelength = wave;
-            ent2.GetComponent<LightVertical>().wavelength = wave;
-            ent4.GetComponent<LightVertical>().wavelength = wave;
-
-
-            ent1.GetComponent<Move1>().Entangled2 = ent2;
-            ent3.GetComponent<Move1>().Entangled2 = ent2;
-            ent1.GetComponent<Move1>().Entangled4 = ent4;
-            ent3.GetComponent<Move1>().Entangled4 = ent4;
+            ent1.GetComponent<LightVertical>().setPreviousPos(transform.position);
+            ent3.GetComponent<LightVertical>().setPreviousPos(transform.position);
+            ent2.GetComponent<HorizontalMove>().setPreviousPos(transform.position);
+            ent4.GetComponent<HorizontalMove>().setPreviousPos(transform.position);
 
 
 
 
-            ent2.GetComponent<LightVertical>().Entangled1 = ent1;
-            ent2.GetComponent<LightVertical>().Entangled3 = ent3;
-            ent4.GetComponent<LightVertical>().Entangled1 = ent1;
-            ent4.GetComponent<LightVertical>().Entangled3 = ent3;
+
+            ent2.GetComponent<HorizontalMove>().Entangle(ent4);
+            ent4.GetComponent<HorizontalMove>().Entangle(ent2);
+
+
+            ent2.GetComponent<HorizontalMove>().sameDirectionCounter = 1;
+            ent4.GetComponent<HorizontalMove>().sameDirectionCounter = 1;
+
+            ent1.GetComponent<LightVertical>().wavelength = wave;
+            ent3.GetComponent<LightVertical>().wavelength = wave;
+            ent2.GetComponent<HorizontalMove>().wavelength = wave;
+            ent4.GetComponent<HorizontalMove>().wavelength = wave;
+
+
+            ent1.GetComponent<LightVertical>().Entangled2 = ent2;
+            ent3.GetComponent<LightVertical>().Entangled2 = ent2;
+            ent1.GetComponent<LightVertical>().Entangled4 = ent4;
+            ent3.GetComponent<LightVertical>().Entangled4 = ent4;
 
 
 
-            // ent3.GetComponent<LightVertical>().Update();
-            // ent4.GetComponent<LightVertical>().Update();
+
+            ent2.GetComponent<HorizontalMove>().Entangled1 = ent1;
+            ent2.GetComponent<HorizontalMove>().Entangled3 = ent3;
+            ent4.GetComponent<HorizontalMove>().Entangled1 = ent1;
+            ent4.GetComponent<HorizontalMove>().Entangled3 = ent3;
+
+
+
+            // ent3.GetComponent<HorizontalMove>().Update();
+            // ent4.GetComponent<HorizontalMove>().Update();
 
 
 
@@ -192,25 +194,25 @@ public class EntangledMove : MonoBehaviour
 
 
                 ent1 = Instantiate(LightModel, new Vector3(x, y, z), transform.rotation);
-                ent1.GetComponent<Move1>().enabled = true;
+                ent1.GetComponent<LightVertical>().enabled = true;
 
-                ent1.GetComponent<Move1>().setPreviousPos(transform.position);
+                ent1.GetComponent<LightVertical>().setPreviousPos(transform.position);
 
 
             }
             else
             {
                 GameObject entangled = intersecting[0].gameObject;
-                if (entangled.GetComponent<Move1>().gameObject != null)
+                if (entangled.GetComponent<LightVertical>().gameObject != null)
                 {
 
 
                     ent1 = Instantiate(LightModel, new Vector3(x, y, z), transform.rotation);
-                    ent1.GetComponent<Move1>().enabled = true;
-                    if ((entangled.GetComponent<Move1>().enabled == true))
+                    ent1.GetComponent<LightVertical>().enabled = true;
+                    if ((entangled.GetComponent<LightVertical>().enabled == true))
                     {
-                        ent1.GetComponent<Move1>().Entangle(entangled);
-                        entangled.GetComponent<Move1>().Entangle(ent1);
+                        ent1.GetComponent<LightVertical>().Entangle(entangled);
+                        entangled.GetComponent<LightVertical>().Entangle(ent1);
                     }
                 }
             }
@@ -228,25 +230,25 @@ public class EntangledMove : MonoBehaviour
 
 
                 ent2 = Instantiate(LightModel, new Vector3(x, y, z), transform.rotation);
-                ent2.GetComponent<LightVertical>().enabled = true;
+                ent2.GetComponent<HorizontalMove>().enabled = true;
 
-                ent2.GetComponent<LightVertical>().setPreviousPos(transform.position);
+                ent2.GetComponent<HorizontalMove>().setPreviousPos(transform.position);
 
 
             }
             else
             {
                 GameObject entangled = intersecting2[0].gameObject;
-                if (entangled.GetComponent<LightVertical>().gameObject != null)
+                if (entangled.GetComponent<HorizontalMove>().gameObject != null)
                 {
 
 
                     ent2 = Instantiate(LightModel, new Vector3(x2, y2, z2), transform.rotation);
-                    ent2.GetComponent<LightVertical>().enabled = true;
-                    if (entangled.GetComponent<LightVertical>().enabled == true)
+                    ent2.GetComponent<HorizontalMove>().enabled = true;
+                    if (entangled.GetComponent<HorizontalMove>().enabled == true)
                     {
-                        ent2.GetComponent<LightVertical>().Entangle(entangled);
-                        entangled.GetComponent<LightVertical>().Entangle(ent2);
+                        ent2.GetComponent<HorizontalMove>().Entangle(entangled);
+                        entangled.GetComponent<HorizontalMove>().Entangle(ent2);
                     }
 
                 }
@@ -260,25 +262,25 @@ public class EntangledMove : MonoBehaviour
 
 
                 ent3 = Instantiate(LightModel, new Vector3(x3, y3, z3), transform.rotation);
-                ent3.GetComponent<Move1>().enabled = true;
+                ent3.GetComponent<LightVertical>().enabled = true;
 
-                ent3.GetComponent<Move1>().setPreviousPos(transform.position);
+                ent3.GetComponent<LightVertical>().setPreviousPos(transform.position);
 
 
             }
             else
             {
                 GameObject entangled = intersecting3[0].gameObject;
-                if (entangled.GetComponent<Move1>().gameObject != null)
+                if (entangled.GetComponent<LightVertical>().gameObject != null)
                 {
 
 
                     ent3 = Instantiate(LightModel, new Vector3(x3, y3, z3), transform.rotation);
-                    ent3.GetComponent<Move1>().enabled = true;
-                    if ((entangled.GetComponent<Move1>().enabled == true))
+                    ent3.GetComponent<LightVertical>().enabled = true;
+                    if ((entangled.GetComponent<LightVertical>().enabled == true))
                     {
-                        ent3.GetComponent<Move1>().Entangle(entangled);
-                        entangled.GetComponent<Move1>().Entangle(ent2);
+                        ent3.GetComponent<LightVertical>().Entangle(entangled);
+                        entangled.GetComponent<LightVertical>().Entangle(ent2);
 
                     }
                 }
@@ -292,25 +294,25 @@ public class EntangledMove : MonoBehaviour
 
 
                 ent4 = Instantiate(LightModel, new Vector3(x4, y4, z4), transform.rotation);
-                ent4.GetComponent<LightVertical>().enabled = true;
+                ent4.GetComponent<HorizontalMove>().enabled = true;
 
-                ent4.GetComponent<LightVertical>().setPreviousPos(transform.position);
+                ent4.GetComponent<HorizontalMove>().setPreviousPos(transform.position);
 
 
             }
             else
             {
                 GameObject entangled = intersecting4[0].gameObject;
-                if (entangled.GetComponent<LightVertical>().gameObject != null)
+                if (entangled.GetComponent<HorizontalMove>().gameObject != null)
                 {
 
 
                     ent4 = Instantiate(LightModel, new Vector3(x4, y4, z4), transform.rotation);
-                    ent4.GetComponent<LightVertical>().enabled = true;
-                    if (entangled.GetComponent<LightVertical>().enabled == true)
+                    ent4.GetComponent<HorizontalMove>().enabled = true;
+                    if (entangled.GetComponent<HorizontalMove>().enabled == true)
                     {
-                        ent4.GetComponent<LightVertical>().Entangle(entangled);
-                        entangled.GetComponent<LightVertical>().Entangle(ent4);
+                        ent4.GetComponent<HorizontalMove>().Entangle(entangled);
+                        entangled.GetComponent<HorizontalMove>().Entangle(ent4);
                     }
 
                 }
@@ -333,8 +335,8 @@ public class EntangledMove : MonoBehaviour
             {
 
                 ent2 = Instantiate(LightModel, new Vector3(x2, y2, z2), transform.rotation);
-                ent2.GetComponent<Move1>().enabled = true;
-                ent2.GetComponent<Move1>().setPreviousPos(transform.position);
+                ent2.GetComponent<LightVertical>().enabled = true;
+                ent2.GetComponent<LightVertical>().setPreviousPos(transform.position);
 
 
             }
@@ -342,7 +344,7 @@ public class EntangledMove : MonoBehaviour
             else {
                 GameObject entangled = intersecting2[0].gameObject;
 
-            if (entangled.GetComponent<Move1>().gameObject != null) { 
+            if (entangled.GetComponent<LightVertical>().gameObject != null) { 
 
 
                       Destroy(entangled);
@@ -356,8 +358,8 @@ public class EntangledMove : MonoBehaviour
             if (intersecting3.Length == 0)
             {
                     ent3 = Instantiate(LightModel, new Vector3(x2, y2, z2), transform.rotation);
-                    ent3.GetComponent<Move1>().enabled = true;
-                    ent3.GetComponent<Move1>().setPreviousPos(transform.position);
+                    ent3.GetComponent<LightVertical>().enabled = true;
+                    ent3.GetComponent<LightVertical>().setPreviousPos(transform.position);
 
 
                 }
@@ -366,7 +368,7 @@ public class EntangledMove : MonoBehaviour
                 {
                     GameObject entangled = intersecting2[0].gameObject;
 
-                    if (entangled.GetComponent<Move1>().gameObject != null)
+                    if (entangled.GetComponent<LightVertical>().gameObject != null)
                     {
 
 

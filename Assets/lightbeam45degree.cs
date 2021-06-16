@@ -1,4 +1,5 @@
-﻿using System;
+/*
+using System;
 using System.Collections.Generic;
 using UnityEditor.Experimental.TerrainAPI;
 using UnityEngine;
@@ -28,28 +29,7 @@ Vector3[] pos = new Vector3[200];
 
     // Start is called before the first frame update
     void Start()
-    {/*
-         
-              Width = Field.getWidth();
-        Length = Field.getLength();
-    
-
-        //Light.AddComponent<Move>();
-
-
-    int i = 0; 
-
-          for (int i3 = (Width/4)-1 ; i3 < (Width/4)+1; i3++) {
-              i++;
-        pos[i] = new Vector3(transform.position.x, transform.position.y, transform.position.z+1+(2*i*(LightBeam.waveGen+1))); //  Iterate over all position vectors and add ot araay
-       // Instantiate (Light, pos[i], transform.rotation); 
-         GameObject ent = Instantiate (EntangledLight, pos[i], transform.rotation); 
-         ent.GetComponent<EntangledMove>().enabled = true;
-       
-      
-        
-    }
-     */
+    {
       fieldScripts = GameObject.Find("FieldScripts");
        obj =  fieldScripts.GetComponent<TimeCounter>();
        
@@ -80,7 +60,7 @@ Vector3[] pos = new Vector3[200];
 
 
 
-                    Vector3 vec = new Vector3(transform.position.x , transform.position.y +  (3 + (i3 *(2*waveSel+1 )) ), transform.position.z -1+  (15+(i2 *(2* waveSel+1 ) )));
+                    Vector3 vec = new Vector3(transform.position.x , transform.position.y + Mathf.Sqrt(2) * (3 + (i3 * (waveSel + 1)) ), transform.position.z + Mathf.Sqrt(2) * (15+(i2 * (waveSel + 1) )));
 
                     //   Vector3 vec2 = new Vector3(transform.position.x - 1, transform.position.y - 15 + Mathf.Sqrt(2) * (15-(i3*(LightBeam.waveGen+1)/2)), transform.position.z + 15 + Mathf.Sqrt(2) * (15+(i3 * (LightBeam.waveGen+1)/2)));
                     //  Iterate over all position vectors and add ot araay
@@ -108,4 +88,4 @@ Vector3[] pos = new Vector3[200];
         
     }
 }
-
+*/

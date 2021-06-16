@@ -498,8 +498,8 @@ GameObject:
   - component: {fileID: 1868079885}
   - component: {fileID: 1868079884}
   - component: {fileID: 1868079883}
-  - component: {fileID: 1868079887}
   - component: {fileID: 1868079888}
+  - component: {fileID: 1868079887}
   m_Layer: 0
   m_Name: LightModel
   m_TagString: Untagged
@@ -588,7 +588,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1868079882}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c52a18655a8784544a77b551bc7e201c, type: 3}
+  m_Script: {fileID: 11500000, guid: 367f7b0f464d4404abf882143e3a23c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   wavelength: 0
