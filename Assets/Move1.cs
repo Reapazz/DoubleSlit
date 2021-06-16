@@ -9,7 +9,7 @@ using System;
 using System.Collections;
 using System.Threading;
 using UnityEngine;
-
+//Move 1 for horizontally moving photons
 public class Move1 : MonoBehaviour
 {
     float x, y, z;
