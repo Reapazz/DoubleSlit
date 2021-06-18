@@ -75,7 +75,7 @@ Vector3[] pos = new Vector3[200];
             for (int i2 = -(Width - 1 + Width % 2)/2;i2 <= (Width - 1 + Width % 2)/2;  i2+= 1 ) {
 
 
-
+                    //int i3 = -(Height - 1 +Height % 2)/2; i3 <= (Height - 1 + Height % 2)/2; i3 += 1
                 for (int i3 = -(Height - 1 +Height % 2)/2; i3 <= (Height - 1 + Height % 2)/2; i3 += 1) {
 
 

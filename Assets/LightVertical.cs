@@ -118,6 +118,7 @@ public class LightVertical : MonoBehaviour
 
                 
         if(Entangled2 == null && Entangled4 != null){
+            Debug.Log("noent2");
 
         z = transform.position.z+ (Entangled4.transform.position.z- Entangled4.GetComponent<HorizontalMove>().prevPos.z);
           try {
@@ -132,7 +133,7 @@ public class LightVertical : MonoBehaviour
         }
 
         else if(Entangled4 == null && Entangled2 != null){
-
+            Debug.Log("noent4");
             z = transform.position.z+ (Entangled2.transform.position.z- Entangled2.GetComponent<HorizontalMove>().prevPos.z); 
             try {
 
@@ -144,6 +145,14 @@ public class LightVertical : MonoBehaviour
             } 
 
         }
+
+        else if (Entangled4 == null && Entangled2 == null || Entangled4 != null && Entangled2 != null){
+
+
+              z = transform.position.z ;
+
+
+        }
                 
                 x = transform.position.x + 1;
              
@@ -152,7 +161,7 @@ public class LightVertical : MonoBehaviour
                     sameDirectionCounter = 0;
 
                     y = transform.position.y - (transform.position.y - prevPos.y);
-                    z = transform.position.z ;
+                  
 
 
 
@@ -160,7 +169,7 @@ public class LightVertical : MonoBehaviour
                 else
                 {
                     y = transform.position.y + (transform.position.y - prevPos.y);
-                    z = transform.position.z ;
+            
                 }
 
 

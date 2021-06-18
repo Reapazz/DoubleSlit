@@ -44,6 +44,8 @@ public class drawSingleSlit : MonoBehaviour
         }
 
 
+
+
         //Draw Double slit:
         for (int ih = -(height+10); ih < height+10; ih++) { 
 
@@ -69,6 +71,9 @@ public class drawSingleSlit : MonoBehaviour
             slit.Add(centerCube);
         }
     }
+    
+
+
     }
 
 

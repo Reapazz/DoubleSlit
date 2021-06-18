@@ -71,6 +71,7 @@
      <Compile Include="Assets\TimeCounter.cs" />
      <Compile Include="Assets\Vector2d.cs" />
      <Compile Include="Assets\Vector3d.cs" />
+     <None Include="Assets\test.shader" />
  <Reference Include="UnityEngine.Purchasing">
  <HintPath>D:/Users/Michael/Documents/GitHub/DoubleSlit/Library/ScriptAssemblies/UnityEngine.Purchasing.dll</HintPath>
  </Reference>
