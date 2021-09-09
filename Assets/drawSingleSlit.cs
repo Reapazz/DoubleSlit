@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEditor.Experimental.TerrainAPI;
 using UnityEngine;
+//using System.Math;
 
 
 public class drawSingleSlit : MonoBehaviour
@@ -9,12 +10,15 @@ public class drawSingleSlit : MonoBehaviour
     List<GameObject> slit = new List<GameObject>();
   
     public GameObject cubePrefab;
-    public int height = 1;
+  //  public int height = 1;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        int h=  LightBeam.Height*2;
+        int w = LightBeam.Width;
+        int wavegen = LightBeam.waveGen;
 
         /*
         //Draw Single slit
@@ -33,9 +37,9 @@ public class drawSingleSlit : MonoBehaviour
         //transform.rotation = Quaternion.Euler(45, 0, 0);
         //Draw Back Wall
 
-        for (int ih = -30; ih <= 30; ih++)
+        for (int ih = -h*wavegen; ih <= h*wavegen; ih++)
         {
-            for (int i = -20; i <= PlaceField.Length + 20; i++)
+            for (int i = -w*3*wavegen; i <= w*3*wavegen; i++)
             {
 
                 GameObject newCube = Instantiate(cubePrefab, new Vector3(PlaceField.Width - 2,    ih, i), transform.rotation);
@@ -47,15 +51,15 @@ public class drawSingleSlit : MonoBehaviour
 
 
         //Draw Double slit:
-        for (int ih = -(height+10); ih < height+10; ih++) { 
+        for (int ih = -(h*wavegen); ih < h*wavegen; ih++) { 
 
-        for (int i = -10; i < (PlaceField.Length - LightBeam.waveGen) / 2 -7; i++)
+        for (int i = -w*2*wavegen; i <((-2)*wavegen)-2; i++)
         {
             GameObject newCube = Instantiate(cubePrefab, new Vector3(LightBeam.waveGen + (LightBeam.waveGen % 2), ih ,  i ), transform.rotation);
             slit.Add(newCube);
         }
 
-        for (int i = (PlaceField.Length + LightBeam.waveGen) / 2 +6 - PlaceField.Length % 2; i < PlaceField.Length+10; i++)
+        for (int i = (2*wavegen)+2; i < w*2*wavegen; i++)
         {
             GameObject newCube = Instantiate(cubePrefab, new Vector3(LightBeam.waveGen * 1 + (LightBeam.waveGen % 2), ih ,  i), transform.rotation);
             slit.Add(newCube);
@@ -63,12 +67,13 @@ public class drawSingleSlit : MonoBehaviour
 
 
 
-        for (int i = ((PlaceField.Length - LightBeam.waveGen) / 2) - 2; i <= ((PlaceField.Length + LightBeam.waveGen) / 2) + 1; i++)
+        //for (int i = Mathf.FloorToInt(1.5f*wavegen); i <= Mathf.FloorToInt(wavegen*0.5f); i++)
+        for (int i =  -wavegen; i <= wavegen; i++)
         {
 
 
-            GameObject centerCube = Instantiate(cubePrefab, new Vector3(LightBeam.waveGen + (LightBeam.waveGen % 2), ih , (( i))), transform.rotation);
-            slit.Add(centerCube);
+             GameObject centerCube = Instantiate(cubePrefab, new Vector3(LightBeam.waveGen + (LightBeam.waveGen % 2), ih , (( i))), transform.rotation);
+             slit.Add(centerCube);
         }
     }
     

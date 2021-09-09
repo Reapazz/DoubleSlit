@@ -31,7 +31,7 @@ public class HorizontalMove : MonoBehaviour
     public List<GameObject> colliderList;
 
     public Boolean returnedToStartZ = false;
-    public int startZ;
+    public float startZ;
 
 
 
@@ -67,7 +67,7 @@ public class HorizontalMove : MonoBehaviour
             {
 
 
-                if (transform.position.z == startZ)
+                if (transform.position.z == startZ && returnedToStartZ == false)
                 {
 
                     returnedToStartZ = true;
@@ -75,7 +75,7 @@ public class HorizontalMove : MonoBehaviour
 
                 }
 
-                if (returnedToStartZ = true)
+                if (returnedToStartZ == true)
                 {
 
 
