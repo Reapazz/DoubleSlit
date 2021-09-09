@@ -19,8 +19,8 @@ public class HorizontalMove : MonoBehaviour
 
 
     public GameObject EntangledModel;
-    public GameObject Entangled,Entangled1,Entangled3;
-   
+    public GameObject Entangled, Entangled1, Entangled3;
+
 
     public Vector3 prevPos;
     public int sameDirectionCounter;
@@ -30,7 +30,8 @@ public class HorizontalMove : MonoBehaviour
     public Material EntangledLightSkin;
     public List<GameObject> colliderList;
 
-
+    public Boolean returnedToStartZ = false;
+    public int startZ;
 
 
 
@@ -41,6 +42,7 @@ public class HorizontalMove : MonoBehaviour
         fieldScripts = GameObject.Find("FieldScripts");
         obj = fieldScripts.GetComponent<TimeCounter>();
         colliderList = fieldScripts.GetComponent<drawSingleSlit>().getColliderArray();
+        startZ = prevPos.z;
 
         //gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
     }
@@ -57,85 +59,116 @@ public class HorizontalMove : MonoBehaviour
 
         x = transform.position.x + 1;
         if (obj.run() == true) //&& obj.LightStep<obj.EntangledLightStep
-        { //If the remainder of the current frame divided by 100 is 0 run the function.
+        {
 
             obj.LightStep = obj.frames;
-            
+
             if (Entangled == null)
             {
-                
 
 
-
-
-
-                if (sameDirectionCounter >=  wavelength)
+                if (transform.position.z == startZ)
                 {
-                    sameDirectionCounter = 0;
+
+                    returnedToStartZ = true;
+                    sameDirectionCounter = wavelength;
+
+                }
+
+                if (returnedToStartZ = true)
+                {
 
 
-                    int i = Random.Range(0, 2);
 
-
-                    if (i == 1)
+                    if (sameDirectionCounter >= wavelength)
                     {
-                       y = transform.position.y;
-
-                        z = transform.position.z + 1;
+                        sameDirectionCounter = 0;
 
 
+                        int i = Random.Range(0, 2);
+
+
+                        if (i == 1)
+                        {
+                            y = transform.position.y;
+
+                            z = transform.position.z + 1;
+
+
+                        }
+                        if (i == 0)
+                        {
+                            z = transform.position.z - 1;
+                            y = transform.position.y;
+
+                        }
+
+
+                        if (i == 2)
+                        {//Debug.Log("I=2");
+                        }
                     }
-                    if (i == 0)
+                    else
                     {
-                        z = transform.position.z - 1;
-                        y = transform.position.y ;
-
-                    }
 
 
-                    if (i == 2)
-                    {//Debug.Log("I=2");
+                        z = transform.position.z + (transform.position.z - prevPos.z);
+                        y = transform.position.y;
+
+
                     }
                 }
-                else
+                else if (returnedToStartZ == false)
                 {
 
+                    if (sameDirectionCounter == wavelength)
+                    {
+                        sameDirectionCounter = 0;
 
-                    z = transform.position.z + (transform.position.z - prevPos.z);
-                    y = transform.position.y ;
+                        z = transform.position.z - (transform.position.z - prevPos.z);
+                        y = transform.position.y;
+
+
+                    }
+                    else
+                    {
+                        z = transform.position.z + (transform.position.z - prevPos.z);
+                        y = transform.position.y;
+                    }
 
 
                 }
             }
             else
             {
-                
+
 
                 if (sameDirectionCounter == wavelength)
                 {
                     sameDirectionCounter = 0;
 
                     z = transform.position.z - (transform.position.z - prevPos.z);
-                    y = transform.position.y ;
+                    y = transform.position.y;
 
 
                 }
                 else
                 {
                     z = transform.position.z + (transform.position.z - prevPos.z);
-                   y = transform.position.y ;
+                    y = transform.position.y;
                 }
 
 
 
             }
+
             sameDirectionCounter++;
             prevPos = transform.position;
             UnityEngine.Collider[] intersecting = Physics.OverlapSphere(new Vector3(x, y, z), 0.0005f);
             if (intersecting.Length == 0)
 
             {
-                
+
                 gameObject.GetComponent<Renderer>().material = LightSkin;
                 transform.position = new Vector3(x, y, z);
 
@@ -156,7 +189,7 @@ public class HorizontalMove : MonoBehaviour
                         Destroy(this);
                         // UnityEngine.Debug.Log("Died");
 
-                 
+
 
 
                     }
@@ -176,19 +209,19 @@ public class HorizontalMove : MonoBehaviour
                         entangled2.GetComponent<HorizontalMove>().Entangle(gameObject);
                         gameObject.GetComponent<Renderer>().material = EntangledLightSkin;
                         entangled2.GetComponent<Renderer>().material = EntangledLightSkin;
-                        
+
                     }
                     if (obj.name.Contains("Sphere"))
                     {
-                       
+
                         Destroy(gameObject);
                         Destroy(this);
                         UnityEngine.Debug.Log("Died in Sphere");
-                        
-                       
+
+
 
                     }
-                    else if(obj.gameObject.GetComponent<HorizontalMove>() != null || obj.gameObject.GetComponent<LightVertical>() != null)
+                    else if (obj.gameObject.GetComponent<HorizontalMove>() != null || obj.gameObject.GetComponent<LightVertical>() != null)
                     {
 
                         transform.position = new Vector3(x, y, z);
