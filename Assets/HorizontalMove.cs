@@ -55,6 +55,12 @@ public class HorizontalMove : MonoBehaviour
 
 
 
+/*
+*Highlighted
+! Alert
+TODO : 
+? Query
+*/ 
 
 
         x = transform.position.x + 1;
